@@ -9,6 +9,8 @@ public static class CourseRoutesConfig {
 
     private static Supabase.Client? supabase;
 
+    const string CorsPolicyName = "_myCorsPolicy";
+
     // All Course Routes
     public static void CourseRoutes(this IEndpointRouteBuilder app, Supabase.Client s)
     {
@@ -20,19 +22,19 @@ public static class CourseRoutesConfig {
         {
             var result = await GetAllCourses();
             return JsonConvert.SerializeObject(result, Formatting.Indented);
-        });
+        }).RequireCors(CorsPolicyName);
 
         app.MapGet($"{routePrefix}/course/{{course_id}}", async (int course_id) => 
         {   
             var result = await GetCourse(course_id);
             return JsonConvert.SerializeObject(result, Formatting.Indented);
-        });
+        }).RequireCors(CorsPolicyName);
 
         app.MapGet($"{routePrefix}/course/{{course_id}}/teebox", async (int course_id) =>
         {
             var result = await GetTeebox(course_id);
             return JsonConvert.SerializeObject(result, Formatting.Indented);
-        });
+        }).RequireCors(CorsPolicyName);
 
         
     }
