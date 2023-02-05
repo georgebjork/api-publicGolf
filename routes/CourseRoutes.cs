@@ -69,6 +69,30 @@ public static class CourseRoutesConfig {
     }
 
 
+    private static List<Teebox> AssociateHolesWithTeeboxes(List<Teebox> teeboxes, List<Hole> holes) {
+        
+        // This dictionary will hold an id (int) for a teebox, a list of holes associacted with that teebox.
+        Dictionary<int, List<Hole>> teeboxMap = new Dictionary<int, List<Hole>>();
+
+        // 
+        foreach (Hole hole in holes)
+        {
+            if (!teeboxMap.ContainsKey(hole.teeboxId))
+            {
+                teeboxMap[hole.teeboxId] = new List<Hole>();
+            }   
+            teeboxMap[hole.teeboxId].Add(hole);
+        }
+
+        foreach (Teebox teebox in teeboxes)
+        {
+            teebox.holes = teeboxMap[teebox.id];
+        }
+
+        return teeboxes;
+    }
+
+
     /// <summary>
     /// This function will run a supabase query to return all of the courses in the database
     /// </summary>
@@ -113,18 +137,51 @@ public static class CourseRoutesConfig {
     private static async Task<List<Teebox>> GetAllTeeboxes() 
     {
         var result = await supabase!.From<Teebox>().Get();
-        return result.Models;
+
+        List<Hole> holes = await GetAllHoles();
+
+        return AssociateHolesWithTeeboxes(result.Models, holes);
     }
 
 
     /// <summary>
     /// This function will run a supabase query to return all of the teeboxes associated with a course id
     /// </summary>
-    /// 
+    /// <param name="course_id">The id of the golf course</param>
     /// <returns>Returns a list of courses from an id</returns>
     private static async Task<List<Teebox>> GetTeebox(int course_id) 
     {
         var result = await supabase!.From<Teebox>().Filter("course_id", Operator.Equals, course_id).Get();
+
+        List<Hole> holes = new List<Hole>();
+        for(int i = 0; i < result.Models.Count; i++) {
+            var holeResult = await GetHoles(result.Models[i].id);
+            holes = holes.Concat(holeResult).ToList();
+        }
+        return AssociateHolesWithTeeboxes(result.Models, holes);
+    }
+
+
+    /// <summary>
+    /// This function will run a supabase query to return all of the holes in the database
+    /// </summary>
+    ///     
+    /// <returns>Returns a list of golf courses</returns>
+    private static async Task<List<Hole>> GetAllHoles() 
+    {
+        var result = await supabase!.From<Hole>().Get();
+        return result.Models;
+    }
+
+
+    /// <summary>
+    /// This function will run a supabase query to return all of the holes associated with a teebox id
+    /// </summary>
+    /// <param name="teebox_id">The id of the teebox </param>
+    /// <returns>Returns a list of holes from an id</returns>
+    private static async Task<List<Hole>> GetHoles(int teebox_id) 
+    {
+        var result = await supabase!.From<Hole>().Filter("teebox_id", Operator.Equals, teebox_id).Get();
         return result.Models;
     }
 

@@ -30,10 +30,10 @@ namespace api_publicGolf.models
         public int yardage { get; set; }
 
         [Column("yardage_in")]
-        public int yardage_in { get; set; }
+        public int yardageIn { get; set; }
 
         [Column("yardage_out")]
-        public int yardage_out { get; set; }
+        public int yardageOut { get; set; }
 
         [Column("par_in")]
         public int parIn { get; set; }
@@ -41,9 +41,11 @@ namespace api_publicGolf.models
         [Column("par_out")]
         public int parOut { get; set; }
 
+        public List<Hole>? holes { get; set; }
+
         public Teebox() { }
 
-        public Teebox(int id, int courseId, string? name, int par, int slope, float rating, int yardage, int yardage_in, int yardage_out, int parIn, int parOut)
+        public Teebox(int id, int courseId, string? name, int par, int slope, float rating, int yardage, int yardageIn, int yardageOut, int parIn, int parOut)
         {
             this.id = id;
             this.courseId = courseId;
@@ -52,8 +54,8 @@ namespace api_publicGolf.models
             this.slope = slope;
             this.rating = rating;
             this.yardage = yardage;
-            this.yardage_in = yardage_in;
-            this.yardage_out = yardage_out;
+            this.yardageIn = yardageIn;
+            this.yardageOut = yardageOut;
             this.parIn = parIn;
             this.parOut = parOut;
         }
