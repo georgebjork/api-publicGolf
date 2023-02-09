@@ -22,6 +22,7 @@ public static class CourseRoutesConfig {
         {
             database = new Database();
             database.closeConnection();
+
             return Results.Ok(database.GetAllCourses());
 
         }).RequireCors(CorsPolicyName);
@@ -30,10 +31,12 @@ public static class CourseRoutesConfig {
         app.MapGet($"{routePrefix}/course/{{course_id}}", (int course_id) => 
         {   
             if(course_id <= 0) {
-                return Results.BadRequest("bad request");
+                return Results.BadRequest("Invalid Id");
             }
 
             database = new Database();
+            database.closeConnection();
+
             return Results.Ok(database.GetCourse(course_id));
 
         }).RequireCors(CorsPolicyName);
@@ -41,8 +44,15 @@ public static class CourseRoutesConfig {
         // Get a list of teeboxes for the course
         app.MapGet($"{routePrefix}/course/{{course_id}}/teebox", (int course_id) =>
         {
+            if(course_id <= 0) {
+                return Results.BadRequest("Invalid Id");
+            }
+
             database = new Database();
+            database.closeConnection();
+
             return Results.Ok(database.GetTeeboxes(course_id));
+            
         }).RequireCors(CorsPolicyName);
     }
 };
