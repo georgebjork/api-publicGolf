@@ -1,7 +1,4 @@
 using api_publicGolf.routes;
-using dotenv.net;
-using api_publicGolf;
-
 
 const string CorsPolicyName = "_myCorsPolicy";
 
