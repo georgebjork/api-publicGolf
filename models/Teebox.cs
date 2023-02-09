@@ -1,12 +1,12 @@
 using Newtonsoft.Json;
 using Postgrest.Attributes;
-using Postgrest.Models;
+using Npgsql;
 
 namespace api_publicGolf.models
 {
     [JsonObject]
     [Table("teebox")]
-    public class Teebox : BaseModel 
+    public class Teebox
     {
         [PrimaryKey("id")]
         public int id { get; set; }
@@ -58,6 +58,20 @@ namespace api_publicGolf.models
             this.yardageOut = yardageOut;
             this.parIn = parIn;
             this.parOut = parOut;
+        }
+
+        public Teebox(NpgsqlDataReader reader) {
+            this.id = reader.GetInt16(0);
+            this.courseId = reader.GetInt16(1);
+            this.name = reader.GetString(2);
+            this.par = reader.GetInt16(3);
+            this.slope = reader.GetInt16(4);
+            this.rating = reader.GetFloat(5);
+            this.yardage = reader.GetInt16(6);
+            this.yardageIn = reader.GetInt16(7);
+            this.yardageOut = reader.GetInt16(8);
+            this.parIn = reader.GetInt16(9);
+            this.parOut = reader.GetInt16(10);
         }
     }
 }

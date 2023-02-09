@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Postgrest.Attributes;
-using Postgrest.Models;
 
 namespace api_publicGolf.models
 {      
     [JsonObject]
     [Table("course")]
-    public class Course : BaseModel
+    public class Course
     {   
         [PrimaryKey("id")]
         public int id { get; set; }
