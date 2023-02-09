@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
-using Postgrest.Attributes;
+﻿using Postgrest.Attributes;
 
 namespace api_publicGolf.models
 {      
-    [JsonObject]
     [Table("course")]
     public class Course
     {   

@@ -1,11 +1,8 @@
-using Newtonsoft.Json;
 using Npgsql;
 using Postgrest.Attributes;
-using Postgrest.Models;
 
 namespace api_publicGolf.models
-{      
-    [JsonObject]
+{     
     [Table("hole")]
     public class Hole
     {   

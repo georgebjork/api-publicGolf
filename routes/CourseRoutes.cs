@@ -1,9 +1,4 @@
 
-using api_publicGolf.models;
-using Newtonsoft.Json;
-using static Postgrest.Constants;
-using api_publicGolf;
-
 namespace api_publicGolf.routes;
 
 public static class CourseRoutesConfig {
@@ -52,7 +47,7 @@ public static class CourseRoutesConfig {
             database.closeConnection();
 
             return Results.Ok(database.GetTeeboxes(course_id));
-            
+
         }).RequireCors(CorsPolicyName);
     }
 };
