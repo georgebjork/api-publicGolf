@@ -39,3 +39,9 @@ C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\System
 C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\obj\Debug\net7.0\api-publicGolf.csproj.CopyComplete
 C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\dotenv.net.dll
 C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\Npgsql.dll
+C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\georg\Documents\Code\Public Golf\api-publicGolf\obj\Debug\net7.0\api-publicGolf.MvcApplicationPartsAssemblyInfo.cs
