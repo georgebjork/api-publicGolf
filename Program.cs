@@ -1,5 +1,4 @@
 using api_publicGolf.routes;
-using Microsoft.AspNetCore.OpenApi;
 
 const string CorsPolicyName = "_myCorsPolicy";
 
@@ -17,6 +16,9 @@ app.UseStatusCodePages(async statusCodeContext
     =>  await Results.Problem(statusCode: statusCodeContext.HttpContext.Response.StatusCode)
                  .ExecuteAsync(statusCodeContext.HttpContext));
 
+app.UseExceptionHandler();
+app.UseStatusCodePages();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -26,9 +28,13 @@ if (app.Environment.IsDevelopment())
 // Here is our api routes
 app.CourseRoutes();
 
+// This will enable cors 
 app.UseCors();
+
+// Default route
 app.MapGet("/api", () => "Welcome to the public golf api!");
 
+// Exception route 
 app.Map("/exception", () => { throw new InvalidOperationException("Sample Exception"); });
 
 // This will be where our api starts on launch
