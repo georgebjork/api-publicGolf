@@ -40,5 +40,10 @@ public static class CourseRoutesConfig {
             => Results.Ok(CourseHelper.UpdateHole(hole)))
                 .RequireCors(CorsPolicyName).WithDescription("This will update a golf hole");
 
+
+        
+        app.MapPut($"{routePrefix}/course/{{teebox_id}}/update/teebox", (int teebox_id, Teebox teebox) 
+            => Results.Ok(CourseHelper.UpdateTeebox(teebox)))
+                .RequireCors(CorsPolicyName).WithDescription("This will update a course teebox");
     }
 };

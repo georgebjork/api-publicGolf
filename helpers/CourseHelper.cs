@@ -150,6 +150,27 @@ public static class CourseHelper {
     }
 
 
+    /// <summary>
+    /// This function will take in a a hole and update it in the database
+    /// </summary>
+    /// <param name="teebox">A teebox object</param>
+    /// <returns>Returns a list of teeboxes with holes</returns>
+    public static int UpdateTeebox(Teebox teebox) 
+    {   
+        Database db = new Database();
+        
+        var sql = @$"UPDATE teebox 
+        SET yardage = {teebox.yardage}, yardage_out = {teebox.yardageOut}, yardage_in = {teebox.yardageIn}
+        WHERE id = {teebox.id}";
+        
+        int rowsAffected = db.UpdateQuery(sql);
+        
+        db.closeConnection();
+
+        return rowsAffected;
+    }
+
+
 
     /// <summary>
     /// This function will take in a a hole and update it in the database
