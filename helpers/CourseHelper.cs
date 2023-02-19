@@ -16,7 +16,7 @@ public static class CourseHelper {
 
         List<Course> courses = new List<Course>();
 
-        using (var reader = db.query("SELECT * FROM course")) 
+        using (var reader = db.query("SELECT * FROM course ORDER BY id")) 
         {
             while (reader.Read())
             {
@@ -41,7 +41,7 @@ public static class CourseHelper {
         Database db = new Database();
         List<Course> courses = new List<Course>();
 
-        using (var reader = db.query($"SELECT * FROM course WHERE id = {course_id}")) 
+        using (var reader = db.query($"SELECT * FROM course WHERE id = {course_id} ORDER BY id")) 
         {
             while (reader.Read())
             {
@@ -67,7 +67,7 @@ public static class CourseHelper {
         Database db = new Database();
         List<Teebox> teeboxes = new List<Teebox>();
 
-        using (var reader = db.query($"SELECT * FROM teebox")) 
+        using (var reader = db.query($"SELECT * FROM teebox ORDER BY id")) 
         {
             while (reader.Read())
             {
@@ -92,7 +92,7 @@ public static class CourseHelper {
         Database db = new Database();
         List<Teebox> teeboxes = new List<Teebox>();
 
-        using (var reader = db.query($"SELECT * FROM teebox WHERE course_id = {course_id}")) 
+        using (var reader = db.query($"SELECT * FROM teebox WHERE course_id = {course_id} ORDER BY id")) 
         {
             while (reader.Read())
             {
@@ -117,7 +117,7 @@ public static class CourseHelper {
         Database db = new Database();
         List<Hole> holes = new List<Hole>();
 
-        using (var reader = db.query($"SELECT * FROM hole")) 
+        using (var reader = db.query($"SELECT * FROM hole ORDER BY id")) 
         {
             while (reader.Read())
             {
@@ -139,7 +139,7 @@ public static class CourseHelper {
         Database db = new Database();
         List<Hole> holes = new List<Hole>();
 
-        using (var reader = db.query($"SELECT hole.* FROM course JOIN teebox ON course.id = teebox.course_id JOIN hole ON teebox.id = hole.teebox_id WHERE course.id = {course_id}")) 
+        using (var reader = db.query($"SELECT hole.* FROM course JOIN teebox ON course.id = teebox.course_id JOIN hole ON teebox.id = hole.teebox_id WHERE course.id = {course_id} ORDER BY id")) 
         {
             while (reader.Read())
             {
