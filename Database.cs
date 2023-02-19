@@ -68,8 +68,23 @@ public class Database {
         // If our connection is not open, lets open it.
         if(connection.State != ConnectionState.Open) { connection.Open(); }
 
-        var command = new NpgsqlCommand(query, connection);
+        var cmd = new NpgsqlCommand(query, connection);
 
-        return command.ExecuteReader();       
+        return cmd.ExecuteReader();       
+    }
+
+    /// <summary>
+    /// This function will run an update query on our database
+    /// </summary>
+    /// <param name="query">Query to run</param>   
+    /// <returns>int representing the rows affected</returns>
+    public int UpdateQuery(String query) 
+    {
+        // If our connection is not open, lets open it.
+        if(connection.State != ConnectionState.Open) { connection.Open(); }
+
+        using var cmd = new NpgsqlCommand(query, connection);
+
+        return cmd.ExecuteNonQuery();
     }
 }

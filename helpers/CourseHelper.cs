@@ -153,6 +153,28 @@ public static class CourseHelper {
 
 
     /// <summary>
+    /// This function will take in a a hole and update it in the database
+    /// </summary>
+    /// <param name="hole">A golf Hole object</param>
+    /// <returns>Returns a list of teeboxes with holes</returns>
+    public static int UpdateHole(Hole hole) 
+    {
+        Database db = new Database();
+        
+        var sql = @$"UPDATE hole 
+        SET hole_number = {hole.holeNumber}, par = {hole.par}, yardage = {hole.yardage}, handicap = {hole.handicap}
+        WHERE id = {hole.id} AND teebox_id = {hole.teeboxId}";
+        
+        int rowsAffected = db.UpdateQuery(sql);
+        
+        db.closeConnection();
+
+        return rowsAffected;
+    }
+
+
+
+    /// <summary>
     /// This function will take in a list of courses and teeboxes, and add a list of teeboxes to the correct course
     /// </summary>
     /// <param name="courses">A list of golf courses</param>

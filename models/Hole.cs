@@ -45,5 +45,10 @@ namespace api_publicGolf.models
             this.yardage = reader.GetInt16(4);
             this.handicap = reader.GetInt16(5);
         }
+
+        public override string ToString()
+        {
+            return $"id: {id}, teeboxId: {teeboxId}, holeNumber: {holeNumber}, par: {par}, yardage: {yardage}, handicap: {handicap}";
+        }
     }
 }
