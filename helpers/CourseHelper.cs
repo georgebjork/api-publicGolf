@@ -1,5 +1,4 @@
 using api_publicGolf.models;
-using api_publicGolf;
 
 namespace api_publicGolf.helpers;
 
@@ -158,7 +157,7 @@ public static class CourseHelper {
     /// <param name="hole">A golf Hole object</param>
     /// <returns>Returns a list of teeboxes with holes</returns>
     public static int UpdateHole(Hole hole) 
-    {
+    {   
         Database db = new Database();
         
         var sql = @$"UPDATE hole 

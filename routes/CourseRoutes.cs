@@ -36,13 +36,9 @@ public static class CourseRoutesConfig {
 
 
         // PUT REQUESTS
-        app.MapPut($"{routePrefix}/course/{{teebox_id}}/update/hole", (int teebox_id, Hole hole) => 
-        {
-            Console.WriteLine(teebox_id);
-            Console.WriteLine(hole.ToString());
-            return Results.Ok(CourseHelper.UpdateHole(hole));
-            
-        }).RequireCors(CorsPolicyName).WithDescription("This will update a golf hole");
+        app.MapPut($"{routePrefix}/course/{{teebox_id}}/update/hole", (int teebox_id, Hole hole) 
+            => Results.Ok(CourseHelper.UpdateHole(hole)))
+                .RequireCors(CorsPolicyName).WithDescription("This will update a golf hole");
 
     }
 };
